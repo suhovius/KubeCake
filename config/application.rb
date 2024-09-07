@@ -44,7 +44,7 @@ module KubeCake
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    config.application_title = ENV.fetch('APPLICATION_TITLE')
+    config.application_title = ENV.fetch('APPLICATION_TITLE', 'KubeCake')
 
     config.redis_url = ENV.fetch('REDIS_URL', 'redis://localhost:6379/0')
 
