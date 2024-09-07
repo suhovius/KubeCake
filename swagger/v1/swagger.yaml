@@ -1,0 +1,16 @@
+---
+openapi: 3.0.1
+info:
+  title: KubeCake Api Documentation
+  version: v1
+components:
+  securitySchemes:
+    http_token_auth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter your token in the format 'Token token=your_token_value'
+    basic_auth:
+      type: http
+      scheme: basic
+paths:
