@@ -1,3 +1,5 @@
+# INFO: Read more here
+# https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-json-web-token-jwt-for-a-github-app#example-using-ruby-to-generate-a-jwt
 module Github
   module Apps
     module AccessTokens
