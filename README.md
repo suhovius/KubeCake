@@ -10,6 +10,14 @@ KubeCake is a DevOps GitOps, Infrastucture code reveiw app made as a task at the
 
 ## TODO: App Demo Video/Gif!
 
+## Architectural Decision Records (ADR) TODO!
+
+[ADR File](.data/ADR.md)
+
+## High-Level Solution Design (HLD) TODO!
+
+[HLD File](.data/HLD.md)
+
 ## Main Feature
 
 Integration with Github and reviewing pull requests with the help of configurable Ollama prompts
@@ -28,7 +36,6 @@ Prompt templates should be able to be configure per each prevously synched repo 
 
 `Organization` (*INFO: Organizations and organization admins are currently out of scope*) presents business concept of some kind of corporate client of this admin panel.
 Organization has such related entites like: Github App configs, and authorized attached github repositories.
-
 
 ## Purpose
 
@@ -88,6 +95,10 @@ services:
 ```
 
 - Start project with `SUPER_ADMIN_PASSWORD=your_super_password docker-compose up` (Don't forget to provide your own secure password here instead of `your_super_password`. As it will be the password of the admin user with highest level of access permissions). By default super admin login email is `super.admin@kubecake.com`
+
+- Environment variables `GITHUB_APP_CLIENT_ID` and `GITHUB_APP_PRIVATE_PEM` (pem file contents as one line if `.env` file is used `File.read("<path to app private pem file>").dump` if rails app runs without via `rails s -p 3000`) must be obtained from the Github App setup.
+
+- `OLLAMA_SERVER_ADDRESS` locally installed `Ollama` address `http://localhost:11434` with downloaded `llama3.1` model via terminal command `ollama run`. In production environment this varibale must contain Ollama server address within the deployment enviroment.
 
 - During starting process database also will be prepopulated with some dummy demo entities like Organization and some dummy data
 
@@ -192,6 +203,3 @@ Generate Private Key and save pem file it later will be used for app tokens gene
 ![Private Key](.data/github_app_setup/05_private_keys.png)
 
 `Client ID`, `Private Key`, and `Installation ID`s will be used for Github API calls
-
-
-
