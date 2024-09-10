@@ -46,8 +46,8 @@ jobs:
 
       - name: Build and push kubecake image
         run: |
-          docker build . -t ghcr.io/${{ github.repository_owner }}/kube-cake:${{ github.sha::7 }} -t ghcr.io/${{ github.repository_owner }}/kube-cake:latest
-          docker push ghcr.io/${{ github.repository_owner }}/kube-cake:${{ github.sha::7 }}
+          docker build . -t ghcr.io/${{ github.repository_owner }}/kube-cake:${{ env.VERSION }} -t ghcr.io/${{ github.repository_owner }}/kube-cake:latest
+          docker push ghcr.io/${{ github.repository_owner }}/kube-cake:${{ env.VERSION }}
           docker push ghcr.io/${{ github.repository_owner }}/kube-cake:latest
       
       - name: Notify success
