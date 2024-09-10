@@ -1,18 +1,16 @@
 module Github
   module Webhooks
-    class Processor < ContextBase
+    class Processor
       class InvalidAuthTokenError < StandardError; end
 
       class UnknownWebhookError < StandardError; end
 
       # TODO Update this logic
       HANDLERS = {
-        'pull_request' => ::Github::Webhooks::Handlers::PullRequest
+        # 'pull_request' => ::Github::Webhooks::Handlers::PullRequest
       }.freeze
 
       def initialize(params:, auth_token:)
-        super()
-
         @params = params
         @auth_token = auth_token
       end

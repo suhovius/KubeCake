@@ -18,6 +18,8 @@ module Github
     end
 
     def create
+      verify_signature!
+
       ::Github::Webhooks::Processor.perform(
         params: params.permit!.to_h
       )
