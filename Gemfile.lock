@@ -256,6 +256,8 @@ GEM
     json-schema (4.3.0)
       addressable (>= 2.8)
     jsonapi-renderer (0.2.2)
+    jwt (2.8.2)
+      base64
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -550,6 +552,7 @@ DEPENDENCIES
   ffaker (~> 2.23)
   groupdate (~> 6.4)
   importmap-rails
+  jwt (~> 2.8, >= 2.8.2)
   octokit (~> 4.0)
   pg (~> 1.1)
   pry-byebug

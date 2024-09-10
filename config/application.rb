@@ -53,5 +53,8 @@ module KubeCake
     config.active_record.encryption.primary_key = ENV['ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY']
     config.active_record.encryption.deterministic_key = ENV['ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY']
     config.active_record.encryption.key_derivation_salt = ENV['ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT']
+
+    config.github_app_client_id = ENV.fetch('GITHUB_APP_CLIENT_ID')
+    config.github_app_private_key = OpenSSL::PKey::RSA.new(ENV.fetch('GITHUB_APP_PRIVATE_PEM').gsub("\\n", "\n"))
   end
 end

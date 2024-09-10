@@ -86,6 +86,48 @@ services:
 
 - After docker compose has finished starting up the application, open application domain `http://0.0.0.0:3000/` and enter the created above super admin credentials. It should log in you into the admin panel of the appication.
 
+For local develpment purposes, in order to work with callbacks and redirects from Github, tunnel to local machine will be required [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/trycloudflare/) service is suggested to be used for that purpose.
+
+Use this command to run tunner for local app, ajust port if your local rails app runs not on default rails port `3000`.
+
+`cloudflared tunnel --url http://localhost:3000`
+
+Also at `config/environments/development.rb` hosts must be configured if different service/domain is used
+
+```
+config.hosts = [
+  /.*\.trycloudflare\.com/ # Allow requests from subdomains like `indexed-chart-oriented-italiano.trycloudflare.com`
+]
+```
+
+### Github App configuration
+
+### TODO: Add more details here
+
+If you plan to setup yours Github App look [here](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/registering-a-github-app)
+
+`GITHUB_WEBHOOK_SECRET_TOKEN` must contain the same webhook secret as configured at app webhooks page
+
+Configure app host, configure setup url (TBD), enable redirect on update, confugre webhooks and webhook secret
+
+#### Github App Permissions
+
+In `Repository permissions` select:
+* `Contents` as `Read only`
+* `Metadata` as `Read only`
+* `Pull requests` as `Read and write`
+
+In `Repository permissions` select:
+* `Installation target`
+* `Meta`
+* `Pull request` (Will be processed only at this MVP Application version as for now)
+
+At `Where can this GitHub App be installed?` select `Any account`
+
+Generate Private Key and save pem file it later will be used for app tokens generation.
+
+`App ID`, `Private Key`, and `Installation ID` will be used for Github API calls
+
 ### How to run tests
 
 - Run specs with `bundle exec rspec` command
