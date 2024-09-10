@@ -1,24 +1,32 @@
+# ollama-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rails-deployment
+  name: ollama-deployment
   labels:
-    app: kubecake
+    app: ollama
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: kubecake
+      app: ollama
   template:
     metadata:
       labels:
-        app: kubecake
+        app: ollama
     spec:
       containers:
-        - name: rails
-          image: ghcr.io/suhovius/kube-cake:latest
+        - name: ollama-container
+          image: your-ollama-image:latest 
           ports:
-            - containerPort: 3000
+            - containerPort: 11434 
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
           env:
             - name: DATABASE_PORT
               valueFrom:

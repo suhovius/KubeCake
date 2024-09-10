@@ -19,28 +19,28 @@ spec:
           image: ghcr.io/suhovius/kube-cake:latest
           command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
           env:
-            - name: DATABASE_URL
-              value: "postgresql://postgres@postgres:5432/kube_cake_production"
-            - name: REDIS_URL
-              value: "redis://redis:6379/0"
-            - name: RAILS_ENV
-              value: "production"
-            - name: APPLICATION_TITLE
-              value: "KubeCake"
-            - name: ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY
+            - name: DATABASE_PORT
               valueFrom:
                 secretKeyRef:
-                  name: rails-secrets
-                  key: ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY
-            - name: ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY
+                  name: app-secrets
+                  key: DATABASE_PORT
+            - name: OLLAMA_SERVER_ADDRESS
               valueFrom:
                 secretKeyRef:
-                  name: rails-secrets
-                  key: ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY
-            - name: ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT
+                  name: app-secrets
+                  key: OLLAMA_SERVER_ADDRESS
+            - name: GITHUB_WEBHOOK_SECRET_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: rails-secrets
-                  key: ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT
-            - name: SECRET_KEY_BASE_DUMMY
-              value: "1"
+                  name: app-secrets
+                  key: GITHUB_WEBHOOK_SECRET_TOKEN
+            - name: GITHUB_APP_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: GITHUB_APP_CLIENT_ID
+            - name: GITHUB_APP_PRIVATE_PEM
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: GITHUB_APP_PRIVATE_PEM
