@@ -1,4 +1,3 @@
-# ollama-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,7 +16,7 @@ spec:
     spec:
       containers:
         - name: ollama-container
-          image: your-ollama-image:latest 
+          image: ollama/ollama 
           ports:
             - containerPort: 11434 
           resources:
