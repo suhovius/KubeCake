@@ -7,16 +7,14 @@ module Github
       	class Changed < Base
 
       		def perform
-            # TODO: This must be done in the background job
-            apply_ai_ollama_review
+            opts = { installation_id:, repo_full_name:, pull_number: }.stringify_keys
+            ::Github::Repos::Pulls::Reviewers::AI::OllamaJob.perform_later(**opts)
       		end
 
           private
 
-          def apply_ai_ollama_review
-            ::Github::Repos::Pulls::Reviewers::AI::Ollama.new(
-              octokit:, repo_full_name:, pull_number:
-            ).perform
+          def installation_id
+            @params.dig(:installation, :id)
           end
 
           def repo_full_name
@@ -25,18 +23,6 @@ module Github
 
           def pull_number
             @params.dig(:pull_request, :number)
-          end
-
-          def token
-            ::Github::Apps::AccessTokens::Fetcher.new(
-              client_id: Rails.application.config.github_app_client_id,
-              private_key: Rails.application.config.github_app_private_key,
-              installation_id: @params.dig(:installation, :id)
-            ).perform
-          end
-
-          def octokit
-            @octokit ||= Octokit::Client.new(access_token: token)
           end
       	end
       end
