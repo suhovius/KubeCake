@@ -1,4 +1,3 @@
-# WIP: Needs to be done. This is just a template
 module Github
   class WebhooksController < ::WebhooksBaseController
     class InvalidSignature < StandardError; end
@@ -9,7 +8,7 @@ module Github
       with: :unauthorized_error_handler
     )
 
-    # Ignore unknown webhooks and metrics but notify them to sentry
+    # Ignore unknown webhooks silently (no errors) but notify them to error tracker
     rescue_from(
       ::Github::Webhooks::Processor::UnknownWebhookError,
     ) do |error|
@@ -20,14 +19,36 @@ module Github
     def create
       verify_signature!
 
-      ::Github::Webhooks::Processor.perform(
-        params: params.permit!.to_h
-      )
+      ::Github::Webhooks::Processor.new(**processor_params).perform
 
       head :ok
     end
 
     private
+
+    def decoded_raw_post
+      @decoded_raw_post ||= ActiveSupport::JSON.decode(request.raw_post)
+    end
+
+    def processor_params
+      # This fix for action is needed as Rails overrides is with controller action name create
+      # while we need an original value here
+      fixed_params = { action: decoded_raw_post['action'] }
+      {
+        params: params.permit!.to_h.merge(fixed_params),
+        header_attrs:
+      }
+    end
+
+    # INFO: Read about headers here
+    # https://docs.github.com/en/webhooks/webhook-events-and-payloads#delivery-headers
+    def header_attrs
+      {
+        event: request.env['HTTP_X_GITHUB_EVENT'],
+        hook_installation_target_id: request.env['HTTP_X_GITHUB_HOOK_INSTALLATION_TARGET_ID'], # Github App ID
+        hook_installation_target_type: request.env['HTTP_X_GITHUB_HOOK_INSTALLATION_TARGET_TYPE']
+      }
+    end
 
     def request_signature
       request.env['HTTP_X_HUB_SIGNATURE_256']
@@ -38,7 +59,7 @@ module Github
         'sha256=',
         OpenSSL::HMAC.hexdigest(
           OpenSSL::Digest.new('sha256'),
-          ENV['GITHUB_WEBHOOK_SECRET_TOKEN'],
+          Rails.application.config.github_webhook_secret_token,
           request.raw_post
         )
       ].join

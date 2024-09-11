@@ -56,6 +56,7 @@ module KubeCake
 
     config.github_app_client_id = ENV.fetch('GITHUB_APP_CLIENT_ID')
     config.github_app_private_key = OpenSSL::PKey::RSA.new(ENV.fetch('GITHUB_APP_PRIVATE_PEM').gsub("\\n", "\n"))
+    config.github_webhook_secret_token = ENV.fetch('GITHUB_WEBHOOK_SECRET_TOKEN')
 
     config.ollama_server_address = ENV.fetch('OLLAMA_SERVER_ADDRESS')
   end

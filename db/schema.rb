@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_28_202627) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_11_012641) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,55 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_28_202627) do
     t.index ["admin_user_id"], name: "index_admin_users_admin_roles_on_admin_user_id"
   end
 
+  create_table "github_accounts", force: :cascade do |t|
+    t.string "external_id", null: false
+    t.string "node_id", null: false
+    t.string "login", null: false
+    t.string "html_url"
+    t.string "avatar_url"
+    t.string "entity_type", null: false
+    t.boolean "site_admin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["external_id"], name: "index_github_accounts_on_external_id", unique: true
+  end
+
+  create_table "github_installation_repositories", force: :cascade do |t|
+    t.bigint "installation_id", null: false
+    t.bigint "repository_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["installation_id", "repository_id"], name: "idx_on_installation_id_repository_id_780bf1ede2", unique: true
+    t.index ["installation_id"], name: "index_github_installation_repositories_on_installation_id"
+    t.index ["repository_id"], name: "index_github_installation_repositories_on_repository_id"
+  end
+
+  create_table "github_installations", force: :cascade do |t|
+    t.string "external_id", null: false
+    t.string "client_id", null: false
+    t.bigint "account_id", null: false
+    t.string "repository_selection"
+    t.string "html_url"
+    t.string "external_app_id", null: false
+    t.string "app_slug", null: false
+    t.jsonb "data", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_github_installations_on_account_id"
+    t.index ["external_id"], name: "index_github_installations_on_external_id", unique: true
+  end
+
+  create_table "github_repositories", force: :cascade do |t|
+    t.string "external_id", null: false
+    t.string "node_id", null: false
+    t.string "name", null: false
+    t.string "full_name"
+    t.boolean "private"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["external_id"], name: "index_github_repositories_on_external_id", unique: true
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -65,4 +114,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_28_202627) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "github_installation_repositories", "github_installations", column: "installation_id"
+  add_foreign_key "github_installation_repositories", "github_repositories", column: "repository_id"
+  add_foreign_key "github_installations", "github_accounts", column: "account_id"
 end

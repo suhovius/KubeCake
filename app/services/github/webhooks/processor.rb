@@ -1,73 +1,47 @@
 module Github
   module Webhooks
     class Processor
-      class InvalidAuthTokenError < StandardError; end
-
       class UnknownWebhookError < StandardError; end
 
-      # TODO Update this logic
       HANDLERS = {
-        # 'pull_request' => ::Github::Webhooks::Handlers::PullRequest
+        'installation.created' => ::Github::Webhooks::Handlers::Installation::Created,
+        'installation.deleted' => ::Github::Webhooks::Handlers::Installation::Deleted,
+        # TODO: Process other webhooks if needed
+        # 'installation_repositories.added' => ::Github::Webhooks::Handlers::InstallationRepositories::Added,
+        # 'installation.new_permissions_accepted' => ::Github::Webhooks::Handlers::Installation::NewPermissionsAccepted,
+        # 'installation.suspend' => ::Github::Webhooks::Handlers::Installation::Suspend,
+        # 'installation.unsuspend' => ::Github::Webhooks::Handlers::Installation::Unsuspend,
+        # 'pull_request.opened' => ::Github::Webhooks::Handlers::PullRequest::Opened,
       }.freeze
 
-      def initialize(params:, auth_token:)
+      def initialize(params:, header_attrs:)
         @params = params
-        @auth_token = auth_token
+        @header_attrs = header_attrs
       end
 
       def perform
-        # TODO: Update this logic
+        raise_unknown_webhook_error! if handler.blank?
 
-        # @github_config = find_github_config!
-
-        # raise_unknown_webhook_error! if handler.blank?
-
-        # authenticate!
-
-        # process_webhook
+        process_webhook
       end
 
       private
 
-      def find_github_config!
-        ::Github::Config.find_by!(uuid: @params[:github_config_uuid])
+      def hook_tag
+        [@header_attrs[:event], @params['action']].join('.')
       end
 
       def handler
-        @handler ||= HANDLERS[@params['event']]
-      end
-
-      def event
-        @params['event'] if handler.present?
-      end
-
-      def webhooks_auth_token
-        auth_token_attr_name = [event, '_webhooks_auth_token'].join
-        @github_config.public_send(auth_token_attr_name)
-      end
-
-      def authenticated?
-        # Compare the tokens in a time-constant manner, to mitigate timing attacks.
-        ::ActiveSupport::SecurityUtils.secure_compare(
-          @auth_token, webhooks_auth_token
-        )
-      end
-
-      def authenticate!
-        return if authenticated?
-
-        message = ["Auth Token '", @auth_token, "' is not valid"].join
-
-        raise InvalidAuthTokenError.new(message)
+        @handler ||= HANDLERS[hook_tag]
       end
 
       def raise_unknown_webhook_error!
-        message = ['Unknown webhook with params: ', @params.to_json].join
+        message = ['Unknown webhook with params: ', @params.to_json, @header_attrs.to_json].join
         raise UnknownWebhookError.new(message)
       end
 
       def process_webhook
-        handler.new(params: @params, github_config: @github_config).perform
+        handler.new(params: @params, header_attrs: @header_attrs).perform
       end
     end
   end

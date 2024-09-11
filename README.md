@@ -8,6 +8,8 @@
 
 KubeCake is a DevOps GitOps, Infrastucture code reveiw app made as a task at the DevOps Course Hackathon.
 
+Link to Github App Installation [KubeCake Glaze](https://github.com/apps/kubecake-glaze)
+
 ## TODO: App Demo Video/Gif!
 
 ## Architectural Decision Records (ADR) TODO!
@@ -103,6 +105,12 @@ services:
 - During starting process database also will be prepopulated with some dummy demo entities like Organization and some dummy data
 
 - After docker compose has finished starting up the application, open application domain `http://0.0.0.0:3000/` and enter the created above super admin credentials. It should log in you into the admin panel of the appication.
+
+### Normal rails development docker-copmose.yml usage with normal code reload
+
+`docker-compose up` is used for `postgres` and `redis` services only while all the rest rails/ruby services are used manually as it is better for local development.
+
+Comment `rails` and `sidekiq` services as they will be started manually when needed via terminal `rails s -p 3000` and `bundle exec sidekiq -C config/sidekiq.yml`. Configure needed ENV variables at `.env` file (see `.env.example` file)
 
 ### How to run tests
 
@@ -203,3 +211,12 @@ Generate Private Key and save pem file it later will be used for app tokens gene
 ![Private Key](.data/github_app_setup/05_private_keys.png)
 
 `Client ID`, `Private Key`, and `Installation ID`s will be used for Github API calls
+
+## Advanced Github App Setup
+
+`Advanced` tab can be see after app is already created.
+
+There is nice feature to `redeliver` failed webhooks that is good for development and testing.
+Status, Headers, Payload and other information can be seen there.
+
+![Advanced Redeliver](.data/github_app_setup/10_advanced_redeliver.png)
