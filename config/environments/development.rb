@@ -70,4 +70,14 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # For local develpment purposes to work with callbacks
+  # tunner to local machine will be required
+  # cloudflared service is suggested to be used for that purpose
+  # https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/trycloudflare/
+  config.hosts = [
+    /.*\.trycloudflare\.com/, # Allow requests from subdomains like `indexed-chart-oriented-italiano.trycloudflare.com`
+    /.*\.ultrahook\.com/, # Allow requests from subdomains like `https://suhovius-kubecake.ultrahook.com`
+    'localhost'
+  ]
 end

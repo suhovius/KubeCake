@@ -41,10 +41,12 @@ module KubeCake
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
 
+    config.active_job.queue_adapter = :sidekiq
+
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    config.application_title = ENV.fetch('APPLICATION_TITLE')
+    config.application_title = ENV.fetch('APPLICATION_TITLE', 'KubeCake')
 
     config.redis_url = ENV.fetch('REDIS_URL', 'redis://localhost:6379/0')
 
@@ -53,5 +55,11 @@ module KubeCake
     config.active_record.encryption.primary_key = ENV['ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY']
     config.active_record.encryption.deterministic_key = ENV['ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY']
     config.active_record.encryption.key_derivation_salt = ENV['ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT']
+
+    config.github_app_client_id = ENV.fetch('GITHUB_APP_CLIENT_ID')
+    config.github_app_private_key = OpenSSL::PKey::RSA.new(ENV.fetch('GITHUB_APP_PRIVATE_PEM').gsub("\\n", "\n"))
+    config.github_webhook_secret_token = ENV.fetch('GITHUB_WEBHOOK_SECRET_TOKEN')
+
+    config.ollama_server_address = ENV.fetch('OLLAMA_SERVER_ADDRESS')
   end
 end
