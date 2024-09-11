@@ -11,7 +11,7 @@ KubeCake is a DevOps GitOps, Infrastucture code reveiw app made as a task at the
 Link to Github App Installation [KubeCake Glaze](https://github.com/apps/kubecake-glaze) 
 
 #### NOTE:
-*If you want to try it then do it in yours onw Github App (See instructions below) or infrastructure. As this demo Github App's Backend might not be running at the moment.*
+*If you want to try it then do it in yours own Github App (See instructions below) or infrastructure. As this demo Github App's Backend might not be running at the moment.*
 
 ## Video demonstration:
 
