@@ -32,6 +32,11 @@ spec:
                 secretKeyRef:
                   name: app-secrets
                   key: DATABASE_PORT
+            - name: OLLAMA_MODEL
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: OLLAMA_MODEL
             - name: OLLAMA_SERVER_ADDRESS
               valueFrom:
                 secretKeyRef:
