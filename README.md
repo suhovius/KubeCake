@@ -19,7 +19,7 @@ Link to Github App Installation [KubeCake Glaze](https://github.com/apps/kubecak
 
 ## Architectural Decision Records (ADR)
 
-App Teck stack: Ruby on Rails, Active Admin, Sidekiq, Postgres, Redis, Ollama.
+App Tech stack: Ruby on Rails, Active Admin, Sidekiq, Postgres, Redis, Ollama.
 
 Proposed Infrastructure stack: Kubernetes, Docker, Helm, Flux, Terraform, AWS.
 
