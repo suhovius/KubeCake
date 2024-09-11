@@ -1,6 +1,13 @@
 # High-Level Solution Design
 
-TODO!
+![HLD Diagram](KubeCake-diagram.png)
 
-Add project high level diagram
+Main app installation and code review flows are shown here at diagram.
 
+There are many webhooks at Github Apps, currently supported are:
+
+- Github App Installation
+- Github App Deletion
+- Pull Request Opened
+- Pull Request Reopened
+- Pull Request Edited
