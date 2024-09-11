@@ -12,9 +12,13 @@ Link to Github App Installation [KubeCake Glaze](https://github.com/apps/kubecak
 
 ## TODO: App Demo Video/Gif!
 
-## Architectural Decision Records (ADR) TODO!
+## Architectural Decision Records (ADR)
 
-[ADR File](.data/ADR.md)
+App Teck stack: Ruby on Rails, Active Admin, Sidekiq, Postgres, Redis, Ollama.
+
+Proposed Infrastructure stack: Kubernetes, Docker, Helm, Flux, Terraform, AWS.
+
+Read more at [ADR File](.data/ADR.md)
 
 ## High-Level Solution Design (HLD) TODO!
 
