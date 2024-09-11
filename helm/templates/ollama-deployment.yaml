@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama-deployment
+  labels:
+    app: ollama
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama
+  template:
+    metadata:
+      labels:
+        app: ollama
+    spec:
+      containers:
+        - name: ollama-container
+          image: ollama/ollama 
+          ports:
+            - containerPort: 11434 
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+          env:
+            - name: DATABASE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: DATABASE_PORT
+            - name: OLLAMA_MODEL
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: OLLAMA_MODEL
+            - name: OLLAMA_SERVER_ADDRESS
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: OLLAMA_SERVER_ADDRESS
+            - name: GITHUB_WEBHOOK_SECRET_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: GITHUB_WEBHOOK_SECRET_TOKEN
+            - name: GITHUB_APP_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: GITHUB_APP_CLIENT_ID
+            - name: GITHUB_APP_PRIVATE_PEM
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: GITHUB_APP_PRIVATE_PEM

@@ -1,0 +1,54 @@
+name: CI for KubeCake
+
+on:
+  push:
+    branches:
+      - devops
+      - main
+      - develop
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set version
+        run: echo "VERSION=1.0.0-${GITHUB_SHA::7}" >> $GITHUB_ENV
+
+      - name: Build and push kubecake image
+        run: |
+          docker build . -t ghcr.io/${{ github.repository_owner }}/kube-cake:${{ env.VERSION }} -t ghcr.io/${{ github.repository_owner }}/kube-cake:latest
+          docker push ghcr.io/${{ github.repository_owner }}/kube-cake:${{ env.VERSION }}
+          docker push ghcr.io/${{ github.repository_owner }}/kube-cake:latest
+      
+      - name: Notify success
+        run: echo "Docker image pushed successfully with version ${{ env.VERSION }} and latest tag."

@@ -42,3 +42,7 @@ docker-compose.dev.yml
 /config/credentials/production.key
 
 .DS_Store
+
+helm/templates/secret.yaml
+
+k8s/secret.yaml

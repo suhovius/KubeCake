@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rails-deployment
+  labels:
+    app: kubecake
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kubecake
+  template:
+    metadata:
+      labels:
+        app: kubecake
+    spec:
+      containers:
+        - name: rails
+          image: ghcr.io/suhovius/kube-cake:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DATABASE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: DATABASE_PORT
+            - name: OLLAMA_MODEL
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: OLLAMA_MODEL
+            - name: OLLAMA_SERVER_ADDRESS
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: OLLAMA_SERVER_ADDRESS
+            - name: GITHUB_WEBHOOK_SECRET_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: GITHUB_WEBHOOK_SECRET_TOKEN
+            - name: GITHUB_APP_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: GITHUB_APP_CLIENT_ID
+            - name: GITHUB_APP_PRIVATE_PEM
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: GITHUB_APP_PRIVATE_PEM
