@@ -4,14 +4,19 @@ module Github
       class UnknownWebhookError < StandardError; end
 
       HANDLERS = {
-        'installation.created' => ::Github::Webhooks::Handlers::Installation::Created,
-        'installation.deleted' => ::Github::Webhooks::Handlers::Installation::Deleted,
+        'installation.created'  => ::Github::Webhooks::Handlers::Installation::Created,
+        'installation.deleted'  => ::Github::Webhooks::Handlers::Installation::Deleted,
+        'pull_request.opened'   => ::Github::Webhooks::Handlers::PullRequest::Changed,
+        'pull_request.reopened' => ::Github::Webhooks::Handlers::PullRequest::Changed,
+        # Needs to be smarter to check if base branch has chaned only, but would be do this check for MVP
+        # As now even pull request title changes and this event is triggered. But it is good for development testing
+        # of review logic
+        'pull_request.edited'   => ::Github::Webhooks::Handlers::PullRequest::Changed,
         # TODO: Process other webhooks if needed
         # 'installation_repositories.added' => ::Github::Webhooks::Handlers::InstallationRepositories::Added,
         # 'installation.new_permissions_accepted' => ::Github::Webhooks::Handlers::Installation::NewPermissionsAccepted,
         # 'installation.suspend' => ::Github::Webhooks::Handlers::Installation::Suspend,
         # 'installation.unsuspend' => ::Github::Webhooks::Handlers::Installation::Unsuspend,
-        # 'pull_request.opened' => ::Github::Webhooks::Handlers::PullRequest::Opened,
       }.freeze
 
       def initialize(params:, header_attrs:)

@@ -3,14 +3,15 @@ module Github
     module Pulls
       module Reviewers
         class Base
-          def initialize(octokit:, owner:, repo:, pull_number:)
+          def initialize(octokit:, repo_full_name:, pull_number:)
             @octokit = octokit
-            @owner = owner
-            @repo = repo
+            @repo_full_name = repo_full_name
             @pull_number = pull_number
           end
 
           def perform
+            # TODO: clone repo to special tmp folder head repo name + branch + pull number
+            # Check logs and diff and existing repo context at review logic
             pull_request_data
             comment_text = prepare_comment_text
             add_comment(comment_text)
@@ -23,7 +24,7 @@ module Github
           end
 
           def fetch_pull_request_data
-            @octokit.pull_request([@owner, @repo].join('/'), @pull_number)
+            @octokit.pull_request(@repo_full_name, @pull_number)
           end
 
           def pull_request_data
@@ -31,7 +32,7 @@ module Github
           end
 
           def add_comment(comment_text)
-            @octokit.add_comment([@owner, @repo].join('/'), @pull_number, comment_text)
+            @octokit.add_comment(@repo_full_name, @pull_number, comment_text)
           end
         end
       end

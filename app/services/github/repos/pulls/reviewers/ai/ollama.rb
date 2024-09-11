@@ -8,10 +8,10 @@ module Github
 
             def prepare_comment_text
               <<~MARKDOWN.strip
-                ### Base SHA
-                #{@pull_request_data.dig(:base, :sha)}
-                ### Head SHA
-                #{@pull_request_data.dig(:head, :sha)}
+                ### Diff
+                ```
+                #{@octokit.pull_request_files(@repo_full_name, @pull_number)}
+                ```
               MARKDOWN
             end
           end
