@@ -8,7 +8,10 @@
 
 KubeCake is a DevOps GitOps, Infrastucture code reveiw app made as a task at the DevOps Course Hackathon.
 
-Link to Github App Installation [KubeCake Glaze](https://github.com/apps/kubecake-glaze)
+Link to Github App Installation [KubeCake Glaze](https://github.com/apps/kubecake-glaze) 
+
+#### NOTE:
+*If you want to try it then do it in yours onw Github App (See instructions below) or infrastructure. As this demo Github App's Backend might not be running at the moment.*
 
 ## Video demonstration:
 
@@ -22,9 +25,9 @@ Proposed Infrastructure stack: Kubernetes, Docker, Helm, Flux, Terraform, AWS.
 
 Read more at [ADR File](.data/ADR.md)
 
-## High-Level Solution Design (HLD) TODO!
+## High-Level Solution Design (HLD)
 
-[HLD File](.data/HLD.md)
+See solution diagram here [HLD File](.data/HLD.md)
 
 ## Main Feature
 
