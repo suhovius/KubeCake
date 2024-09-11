@@ -76,6 +76,8 @@ Rails.application.configure do
   # cloudflared service is suggested to be used for that purpose
   # https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/trycloudflare/
   config.hosts = [
-    /.*\.trycloudflare\.com/ # Allow requests from subdomains like `indexed-chart-oriented-italiano.trycloudflare.com`
+    /.*\.trycloudflare\.com/, # Allow requests from subdomains like `indexed-chart-oriented-italiano.trycloudflare.com`
+    /.*\.ultrahook\.com/, # Allow requests from subdomains like `https://suhovius-kubecake.ultrahook.com`
+    'localhost'
   ]
 end

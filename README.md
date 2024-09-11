@@ -126,11 +126,27 @@ Use this command to run tunner for local app, ajust port if your local rails app
 
 `cloudflared tunnel --url http://localhost:3000`
 
+WARNING! `cloudflared` will generate new domain per each run, so you will need to update Github App settings `each time`.
+
+So, thus there is another good tool `ultrahook` for local hooks tunnes (supports only POST requests) is
+
+[https://www.ultrahook.com/](https://www.ultrahook.com/)
+
+```
+$ gem install ultrahook
+$ ultrahook kubecake 3000
+Authenticated as suhovius
+Forwarding activated...
+https://suhovius-kubecake.ultrahook.com -> http://localhost:3000
+```
+
 Also at `config/environments/development.rb` hosts must be configured if different service/domain is used
 
 ```
 config.hosts = [
-  /.*\.trycloudflare\.com/ # Allow requests from subdomains like `indexed-chart-oriented-italiano.trycloudflare.com`
+  /.*\.trycloudflare\.com/, # Allow requests from subdomains like `indexed-chart-oriented-italiano.trycloudflare.com`
+  /.*\.ultrahook\.com/, # Allow requests from subdomains like `https://suhovius-kubecake.ultrahook.com`
+  'localhost'
 ]
 ```
 

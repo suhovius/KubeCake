@@ -8,7 +8,7 @@ module Github
 
       		def perform
             opts = { installation_id:, repo_full_name:, pull_number: }.stringify_keys
-            ::Github::Repos::Pulls::Reviewers::AI::OllamaJob.perform_later(**opts)
+            ::Github::Repos::Pulls::Reviewers::OllamaAIJob.perform_later(**opts)
       		end
 
           private
