@@ -10,7 +10,9 @@ KubeCake is a DevOps GitOps, Infrastucture code reveiw app made as a task at the
 
 Link to Github App Installation [KubeCake Glaze](https://github.com/apps/kubecake-glaze)
 
-## TODO: App Demo Video/Gif!
+## Video demonstration:
+
+[![IMAGE ALT TEXT](.data/video-demo-preview.jpg)](http://www.youtube.com/watch?v=vk1Nq5niAsM "Click to watch")
 
 ## Architectural Decision Records (ADR)
 
