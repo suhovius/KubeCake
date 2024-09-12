@@ -12,7 +12,7 @@ module Github
           def generated_data
             ollama_client.generate(
               {
-                model: 'llama3.1',
+                model: Rails.application.config.ollama_model,
                 prompt: prompt_for(diff_text),
                 stream: false
               }

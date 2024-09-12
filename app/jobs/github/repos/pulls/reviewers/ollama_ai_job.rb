@@ -1,3 +1,6 @@
+# Fix code caching
+Dir["#{::Rails.root}/app/services/github/*.rb"].each {|file| require file }
+
 module Github
   module Repos
     module Pulls
