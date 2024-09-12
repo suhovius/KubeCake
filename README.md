@@ -43,7 +43,11 @@ Also admin panel allows `super_admin` users to see the rSwag API documentation (
 
 Observed github repository pull requests must trigger the webhooks, which schedule background job that performs pull request code reivew with Ollama prompts and adds comments to the pull request.
 
-Prompt templates should be able to be configure per each prevously synched repo by Super Admin.
+Prompt templates should be able to be configured/assigned per each prevously synched repo by Super Admin. Also multipe prompts and their execution order should be able to managed. So there must be manageable collection of diffrent prompts and ability to assign and arrange their order per each project.
+
+Also Admin Panel should show all the synched Github Repositories and Accounts data.
+
+#### *NOTE: Currently Admin Panel is just a template. View synched Accounts, Repositories and Prompts per Repo editing feature will be available before Hackathon project demonstration. Currently it uses hardcoded prompt template.*
 
 `Organization` (*INFO: Organizations and organization admins are currently out of scope*) presents business concept of some kind of corporate client of this admin panel.
 Organization has such related entites like: Github App configs, and authorized attached github repositories.
