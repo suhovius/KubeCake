@@ -13,7 +13,7 @@ Link to Github App Installation [KubeCake Glaze](https://github.com/apps/kubecak
 #### NOTE:
 *If you want to try it then do it in yours own Github App (See instructions below) or infrastructure. As this demo Github App's Backend might not be running at the moment.*
 
-## Video demonstration:
+## Video demonstration
 
 [![IMAGE ALT TEXT](.data/video-demo-preview.jpg)](http://www.youtube.com/watch?v=vk1Nq5niAsM "Click to watch")
 
@@ -53,17 +53,26 @@ Organization has such related entites like: Github App configs, and authorized a
 Make MVP app for the DevOps Course hackathon, a configurable plantform to perform AI code reviews at Github with future expansion to different SCM platforms like Gitlab, Bitbucket, etc. It provides extendable architecture to support multiple AI sources in future.
 Main purpose for MVP is to test the general implementation and basic functionality of the app.
 
-# Deployment Settings (TODO: TBD Add description with DevOps!)
+## Deployment Settings (TODO: TBD Add description with DevOps!)
 
-Repo has such DevOps area features as:
+*Repo has such DevOps area features as:*
 
-* helm charts
-* terraform infrastructure code
-* github actions workflow pipeline that builds github releases
+| Directory         | Description                                  |
+| ----------------- | -------------------------------------------- |
+| .github/workflows | Github Actions Workflows                     |
+| helm              | Helm Charts                                  |
+| k8s               | Kubernetes Deployment manifests              |
+| terraform         | Terraform infrastructure configuration files |
+
+## Dependencies
 
 ### Ruby version
 
 `ruby 3.3.1`
+
+## Ruby Version manager
+
+[rbenv](https://github.com/rbenv/rbenv) is recommended to be used as ruby version manager for local development. It automatically accepts the ruby version settings from the `.ruby-version` file.
 
 ### System dependencies to start at local machine
 
@@ -137,7 +146,7 @@ Use this command to run tunner for local app, ajust port if your local rails app
 
 WARNING! `cloudflared` will generate new domain per each run, so you will need to update Github App settings `each time`.
 
-So, thus there is another good tool `ultrahook` for local hooks tunnes (supports only POST requests) is
+So, thus there is another good tool `ultrahook` for local hooks tunnes (but it supports POST requests only)
 
 [https://www.ultrahook.com/](https://www.ultrahook.com/)
 
@@ -206,11 +215,6 @@ In `Repository permissions` select:
 * `Metadata` as `Read only`
 * `Pull requests` as `Read and write`
 
-In `Repository permissions` select:
-* `Installation target`
-* `Meta`
-* `Pull request` (Will be processed only at this MVP Application version as for now)
-
 At `Where can this GitHub App be installed?` select `Any account`
 
 *Repository permissions setup*
@@ -223,7 +227,10 @@ At `Where can this GitHub App be installed?` select `Any account`
 
 ## Subscribe to events
 
-Check `Installation target`, `Meta` and `Pull request` events.
+In `Subscribe to events` select checkboxes for:
+* `Installation target`
+* `Meta`
+* `Pull request` (Will be processed only at this MVP Application version as for now)
 
 *Events setup*
 
@@ -239,7 +246,7 @@ Generate Private Key and save pem file it later will be used for app tokens gene
 
 ## Advanced Github App Setup
 
-`Advanced` tab can be see after app is already created.
+`Advanced` tab can be seen after app is already created.
 
 There is nice feature to `redeliver` failed webhooks that is good for development and testing.
 Status, Headers, Payload and other information can be seen there.
