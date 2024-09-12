@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: ollama-container
-          image: ollama/ollama 
+          image: ollama/ollama
+          command: ["ollama run {{ .Values.secret.OLLAMA_MODEL | llama3.1 }}"]
           ports:
             - containerPort: 11434 
           resources:
@@ -26,34 +27,3 @@ spec:
             requests:
               memory: "1Gi"
               cpu: "500m"
-          env:
-            - name: DATABASE_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: app-secrets
-                  key: DATABASE_PORT
-            - name: OLLAMA_MODEL
-              valueFrom:
-                secretKeyRef:
-                  name: app-secrets
-                  key: OLLAMA_MODEL
-            - name: OLLAMA_SERVER_ADDRESS
-              valueFrom:
-                secretKeyRef:
-                  name: app-secrets
-                  key: OLLAMA_SERVER_ADDRESS
-            - name: GITHUB_WEBHOOK_SECRET_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: app-secrets
-                  key: GITHUB_WEBHOOK_SECRET_TOKEN
-            - name: GITHUB_APP_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: app-secrets
-                  key: GITHUB_APP_CLIENT_ID
-            - name: GITHUB_APP_PRIVATE_PEM
-              valueFrom:
-                secretKeyRef:
-                  name: app-secrets
-                  key: GITHUB_APP_PRIVATE_PEM
