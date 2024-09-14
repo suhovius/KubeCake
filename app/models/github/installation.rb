@@ -1,5 +1,7 @@
 module Github
   class Installation < ApplicationRecord
+    REPOSITORY_SELECTION = %w[all selected].freeze
+
     belongs_to :account, class_name: 'Github::Account'
 
     has_many :installation_repositories,
