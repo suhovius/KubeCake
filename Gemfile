@@ -15,6 +15,8 @@ gem 'pg', '~> 1.1'
 
 gem 'octokit', '~> 4.0'
 
+gem 'faraday-retry', '~> 2.2', '>= 2.2.1'
+
 gem 'ollama-ai', '~> 1.3.0'
 
 gem 'jwt', '~> 2.8', '>= 2.8.2'
@@ -49,6 +51,7 @@ gem 'bootsnap', require: false
 gem 'dotenv-rails', '~> 3.1'
 gem 'draper', '~> 4.0', '>= 4.0.2'
 gem 'activeadmin', '~> 3.2'
+gem 'activeadmin_reorderable', '~> 0.3.3'
 gem 'active_model_serializers', '~> 0.10.2'
 gem 'carrierwave', '~> 3.0', '>= 3.0.7'
 gem 'chartkick', '~> 5.0', '>= 5.0.6'
