@@ -246,6 +246,7 @@ GEM
     fugit (1.11.0)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
+    gemoji (4.1.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     groupdate (6.4.0)
@@ -591,6 +592,7 @@ DEPENDENCIES
   faker (~> 3.3, >= 3.3.1)
   faraday-retry (~> 2.2, >= 2.2.1)
   ffaker (~> 2.23)
+  gemoji (~> 4.1)
   groupdate (~> 6.4)
   importmap-rails
   jwt (~> 2.8, >= 2.8.2)

@@ -16,7 +16,7 @@ ActiveAdmin.register AI::CodeReview::Prompt do
   show do |prompt|
     attributes_table do
       row :id
-      row :title
+      row(:title) { emojify_unicode(prompt.title) }
       row :key
       row :category
       row(:template) do
@@ -31,7 +31,7 @@ ActiveAdmin.register AI::CodeReview::Prompt do
 
   index do
     column :id
-    column :title
+    column(:title) { |prompt| emojify_unicode(prompt.title) }
     column :key
     column :category
     column(:template) { |prompt| prompt.template.truncate(100) }
