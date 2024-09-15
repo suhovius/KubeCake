@@ -45,12 +45,20 @@ module Github
               end
           end
 
+          def prompts_to_assign
+            AI::CodeReview::Prompt.practical
+          end
+
           def sync_repositories
             @params['repositories'].map do |attrs|
               ::Github::Repository
                 .find_or_initialize_by(external_id: attrs['id']).tap do |repo|
+                  should_assign_prompts = repo.new_record?
+
                   repo.assign_attributes(attrs.slice(*REPOSITORY_ATTR_NAMES))
                   repo.save!
+
+                  repo.ai_code_review_prompts = prompts_to_assign if should_assign_prompts
                 end
             end
           end

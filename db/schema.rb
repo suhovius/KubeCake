@@ -60,9 +60,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_14_214848) do
 
   create_table "ai_code_review_prompts", force: :cascade do |t|
     t.string "title", null: false
+    t.string "category", null: false
     t.string "template", null: false
+    t.integer "reviews_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_ai_code_review_prompts_on_title", unique: true
   end
 
   create_table "github_accounts", force: :cascade do |t|

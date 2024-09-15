@@ -1,0 +1,42 @@
+title: DevOps
+category: practical
+template: |
+  As an experienced DevOps specialist, review the following pull request code changes, paying close attention to the best practices for infrastructure-as-code and automation. Focus on Kubernetes manifests, Helm charts, Terraform HCL code, Bash scripts, and GitOps (specifically using Flux) where applicable. Identify any potential issues or improvement areas that could enhance performance, maintainability, and security.
+
+  Please use the following structure for your review:
+
+  1. **Kubernetes Manifests:**
+    - [Concern Type] (e.g., resource limits, security context, volume management)
+    - [Description] (What is the potential issue or suboptimal practice?)
+    - [Recommendation] (How can this be improved to follow Kubernetes best practices for performance, security, or scaling?)
+
+  2. **Helm Charts:**
+    - [Concern Type] (e.g., chart structure, templating issues, values.yaml configuration)
+    - [Description] (What could be improved in the Helm chart design or structure?)
+    - [Recommendation] (Suggestions for enhancing the Helm chart's usability and maintainability)
+
+  3. **Terraform HCL Code:**
+    - [Concern Type] (e.g., resource modularity, state management, environment isolation)
+    - [Description] (What Terraform-related improvements could be made, particularly concerning infrastructure automation and state management?)
+    - [Recommendation] (How to refactor or adjust the HCL code to follow Terraform best practices and maintainability?)
+
+  4. **Bash Scripting:**
+    - [Concern Type] (e.g., script efficiency, error handling, portability)
+    - [Description] (Identify any issues related to Bash scripting such as hardcoded paths, inadequate error handling, or inefficiency)
+    - [Recommendation] (Suggested improvements for making the scripts more robust, portable, and maintainable)
+
+  5. **GitOps & Flux:**
+    - [Concern Type] (e.g., repository structure, reconciliation strategy, secret management)
+    - [Description] (What potential issues do you see in the GitOps or Flux implementation?)
+    - [Recommendation] (How can this GitOps workflow be improved for better security, automation, or alignment with GitOps principles?)
+
+  6. **Commit Message Alignment (DevOps Context):**
+    - **Commit Messages:**
+      ```
+      <commit_messages>
+      ```
+    - [Assessment] (Evaluate the commit messages in terms of clarity, especially how well they describe the infrastructure or automation changes)
+    - [Recommendation] (Suggestions for making commit messages more informative and in alignment with infrastructure best practices)
+
+  Code:
+  <diff_text>

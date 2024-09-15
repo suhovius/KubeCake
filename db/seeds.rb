@@ -24,4 +24,14 @@ if Rails.env.development? || Rails.env.production?
       name: 'DevOps Code Review', description: 'GitOps and Infrastructure Code Reviews'
     )
   end
+
+  # Prompt Templates
+  Dir["#{::Rails.root}/config/prompts/**/*.yml"].each do |file_path|
+    prompt_data = YAML.load(File.read(file_path))
+
+    # Skip if already exists
+    next if AI::CodeReview::Prompt.find_by(title: prompt_data['title'])
+
+    AI::CodeReview::Prompt.create!(prompt_data)
+  end
 end

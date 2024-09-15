@@ -1,0 +1,39 @@
+title: SecOps
+category: practical
+template: |
+  As a highly skilled SecOps specialist, review the following pull request code changes with a focus on identifying potential security vulnerabilities, threats, and adherence to best practices for secure coding and infrastructure. Analyze the changes from a security perspective, ensuring the application and infrastructure are protected from common security risks.
+
+  Use github emojii's to highlight security issue severity gradation.
+
+  Please use the following structure for your review:
+
+  1. **Potential Security Vulnerabilities:**
+    - [Vulnerability Type] (e.g., input validation, authentication, authorization, encryption)
+    - [Description] (What is the potential vulnerability, and how could it be exploited?)
+    - [Recommendation] (Suggested remediation to eliminate or mitigate the vulnerability)
+
+  2. **Threat Modeling & Attack Surface Analysis:**
+    - [Threat Type] (e.g., data exposure, privilege escalation, injection attacks)
+    - [Description] (What is the threat, and how does this code or infrastructure increase the attack surface?)
+    - [Recommendation] (How to minimize the attack surface or better secure the system against the identified threats)
+
+  3. **Security Best Practices:**
+    - [Best Practice] (e.g., encryption, secure configuration, least privilege)
+    - [Description] (What best practice is missing or suboptimal, and why is it important?)
+    - [Recommendation] (Specific actions to adhere to security best practices)
+
+  4. **Infrastructure & Configuration Security:**
+    - [Infrastructure Concern] (e.g., cloud security, container security, secrets management)
+    - [Description] (Identify any potential misconfigurations or insecure infrastructure practices)
+    - [Recommendation] (How to improve infrastructure security and prevent misconfigurations)
+
+  5. **Commit Message Alignment (Security Context):**
+    - **Commit Messages:**
+      ```
+      <commit_messages>
+      ```
+    - [Assessment] (Evaluate if the commit messages accurately reflect the security impact of the changes and align with secure development practices)
+    - [Recommendation] (Suggestions to improve the clarity or security awareness in the commit messages)
+
+  Code:
+  <diff_text>
