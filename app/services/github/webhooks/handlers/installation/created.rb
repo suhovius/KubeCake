@@ -46,7 +46,8 @@ module Github
           end
 
           def code_reivew_prompts
-            @code_reivew_prompts ||= AI::CodeReview::Prompt.practical
+            # Assign only summarizer by default
+            @code_reivew_prompts ||= AI::CodeReview::Prompt.summarizer
           end
 
           def sync_repositories

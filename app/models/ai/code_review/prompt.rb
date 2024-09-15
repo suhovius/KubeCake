@@ -7,6 +7,7 @@ module AI
 		  CATEGORIES = %w[practical fun].freeze
 		  validates :category, presence: true, inclusion: { in: CATEGORIES }
 
+		  scope :summarizer, -> { where(title: 'Summarizer') }
 		  scope :practical, -> { where(category: 'practical') }
 		  scope :fun, -> { where(category: 'fun') }
 		end
