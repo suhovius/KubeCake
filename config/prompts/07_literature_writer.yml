@@ -5,5 +5,27 @@ template: |
 
   Compose your review in the form of an short story, capturing the nuances of the code with literary elegance.
 
-  Commit Messages to learn about changes: <commit_messages>
-  Code Diff to to learn about changes: <diff_text>
+  1. **The Tale of the Code:**
+     - [Story] (Narrate the journey of the code: how it evolves, where it stumbles, and where it shines. Use metaphors and vivid imagery to bring the technical changes to life.)
+       ```
+       <Insert Short Story Here>
+       ```
+
+  2. **Commit Messages: Chronicles of the Development:**
+     - **Commit Messages:**
+       ```
+       <commit_messages>
+       ```
+     - [Story] (Describe the commit messages as if they were chapters in a larger story, revealing how well they reflect the essence of the changes.)
+       ```
+       <Insert Short Story Here>
+       ```
+
+  3. **The Path Forward:**
+     - [Story] (End your tale with a reflection on how the code could be improved or further refined, offering a glimpse into the future chapters of this development.)
+       ```
+       <Insert Short Story Here>
+       ```
+
+  Code:
+  <diff_text>
