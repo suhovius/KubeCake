@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_11_012641) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_14_214848) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -56,6 +56,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_012641) do
     t.index ["admin_role_id"], name: "index_admin_users_admin_roles_on_admin_role_id"
     t.index ["admin_user_id", "admin_role_id"], name: "idx_on_admin_user_id_admin_role_id_c0859d813f"
     t.index ["admin_user_id"], name: "index_admin_users_admin_roles_on_admin_user_id"
+  end
+
+  create_table "ai_code_review_prompts", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "category", null: false
+    t.string "template", null: false
+    t.integer "reviews_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_ai_code_review_prompts_on_title", unique: true
   end
 
   create_table "github_accounts", force: :cascade do |t|
@@ -107,6 +117,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_012641) do
     t.index ["external_id"], name: "index_github_repositories_on_external_id", unique: true
   end
 
+  create_table "github_repository_ai_code_review_prompts", force: :cascade do |t|
+    t.bigint "repository_id", null: false
+    t.bigint "prompt_id", null: false
+    t.integer "survey_questions", default: 0
+    t.integer "position", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prompt_id"], name: "index_github_repository_ai_code_review_prompts_on_prompt_id"
+    t.index ["repository_id", "prompt_id"], name: "idx_on_repository_id_prompt_id_6d67341a60", unique: true
+    t.index ["repository_id"], name: "idx_on_repository_id_63e29082fa"
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -117,4 +139,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_012641) do
   add_foreign_key "github_installation_repositories", "github_installations", column: "installation_id"
   add_foreign_key "github_installation_repositories", "github_repositories", column: "repository_id"
   add_foreign_key "github_installations", "github_accounts", column: "account_id"
+  add_foreign_key "github_repository_ai_code_review_prompts", "ai_code_review_prompts", column: "prompt_id"
+  add_foreign_key "github_repository_ai_code_review_prompts", "github_repositories", column: "repository_id"
 end

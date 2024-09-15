@@ -41,7 +41,7 @@ While organization admins can only manage organsations data to which they are gr
 
 Also admin panel allows `super_admin` users to see the rSwag API documentation (INFO: currenlty empty) and to monitor the state of the sidekiq bacground jobs and scheduled jobs at the 'Settings' menu section. Super admin users also can be managed there.
 
-Observed github repository pull requests must trigger the webhooks, which schedule background job that performs pull request code reivew with Ollama prompts and adds comments to the pull request.
+Observed github repository pull requests must trigger the webhooks, which schedule background job that performs pull request code review with Ollama prompts and adds comments to the pull request.
 
 Prompt templates should be able to be configured/assigned per each prevously synched repo by Super Admin. Also multipe prompts and their execution order should be able to managed. So there must be manageable collection of diffrent prompts and ability to assign and arrange their order per each project.
 

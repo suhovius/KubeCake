@@ -10,8 +10,6 @@ module Github
           end
 
           def perform
-            # TODO: clone repo to special tmp folder head repo name + branch + pull number
-            # Check logs and diff and existing repo context at review logic
             pull_request_data
             comment_text = prepare_comment_text
             add_comment(comment_text)

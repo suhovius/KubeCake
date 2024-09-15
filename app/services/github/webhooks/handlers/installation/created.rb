@@ -45,12 +45,21 @@ module Github
               end
           end
 
+          def code_reivew_prompts
+            # Assign only summarizer by default
+            @code_reivew_prompts ||= AI::CodeReview::Prompt.summarizer
+          end
+
           def sync_repositories
             @params['repositories'].map do |attrs|
               ::Github::Repository
                 .find_or_initialize_by(external_id: attrs['id']).tap do |repo|
+                  should_assign_prompts = repo.new_record?
+
                   repo.assign_attributes(attrs.slice(*REPOSITORY_ATTR_NAMES))
                   repo.save!
+
+                  repo.ai_code_review_prompts = code_reivew_prompts if should_assign_prompts
                 end
             end
           end
