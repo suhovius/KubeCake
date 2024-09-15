@@ -117,16 +117,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_14_214848) do
     t.index ["external_id"], name: "index_github_repositories_on_external_id", unique: true
   end
 
-  create_table "github_repository_ai_code_reivew_prompts", force: :cascade do |t|
+  create_table "github_repository_ai_code_review_prompts", force: :cascade do |t|
     t.bigint "repository_id", null: false
     t.bigint "prompt_id", null: false
     t.integer "survey_questions", default: 0
     t.integer "position", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["prompt_id"], name: "index_github_repository_ai_code_reivew_prompts_on_prompt_id"
-    t.index ["repository_id", "prompt_id"], name: "idx_on_repository_id_prompt_id_47793be6f0", unique: true
-    t.index ["repository_id"], name: "idx_on_repository_id_104bf2fe48"
+    t.index ["prompt_id"], name: "index_github_repository_ai_code_review_prompts_on_prompt_id"
+    t.index ["repository_id", "prompt_id"], name: "idx_on_repository_id_prompt_id_6d67341a60", unique: true
+    t.index ["repository_id"], name: "idx_on_repository_id_63e29082fa"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -139,6 +139,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_14_214848) do
   add_foreign_key "github_installation_repositories", "github_installations", column: "installation_id"
   add_foreign_key "github_installation_repositories", "github_repositories", column: "repository_id"
   add_foreign_key "github_installations", "github_accounts", column: "account_id"
-  add_foreign_key "github_repository_ai_code_reivew_prompts", "ai_code_review_prompts", column: "prompt_id"
-  add_foreign_key "github_repository_ai_code_reivew_prompts", "github_repositories", column: "repository_id"
+  add_foreign_key "github_repository_ai_code_review_prompts", "ai_code_review_prompts", column: "prompt_id"
+  add_foreign_key "github_repository_ai_code_review_prompts", "github_repositories", column: "repository_id"
 end

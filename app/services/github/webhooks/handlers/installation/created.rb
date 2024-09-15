@@ -45,8 +45,8 @@ module Github
               end
           end
 
-          def prompts_to_assign
-            AI::CodeReview::Prompt.practical
+          def code_reivew_prompts
+            @code_reivew_prompts ||= AI::CodeReview::Prompt.practical
           end
 
           def sync_repositories
@@ -58,7 +58,7 @@ module Github
                   repo.assign_attributes(attrs.slice(*REPOSITORY_ATTR_NAMES))
                   repo.save!
 
-                  repo.ai_code_review_prompts = prompts_to_assign if should_assign_prompts
+                  repo.ai_code_review_prompts = code_reivew_prompts if should_assign_prompts
                 end
             end
           end

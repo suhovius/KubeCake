@@ -94,6 +94,9 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    acts_as_list (1.2.2)
+      activerecord (>= 6.1)
+      activesupport (>= 6.1)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
     arbre (1.7.0)
@@ -548,6 +551,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.2)
   activeadmin (~> 3.2)
   activeadmin_reorderable (~> 0.3.3)
+  acts_as_list (~> 1.2, >= 1.2.2)
   awesome_print (~> 1.9, >= 1.9.2)
   better_errors (~> 2.10, >= 2.10.1)
   binding_of_caller (~> 1.0, >= 1.0.1)

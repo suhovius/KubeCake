@@ -13,11 +13,18 @@ module Github
 
             token = token_for(installation_id)
 
-            ::Github::Repos::Pulls::Reviewers::OllamaAI.new(
-              octokit: octokit_for(token),
-              repo_full_name: args.fetch('repo_full_name'),
-              pull_number: args.fetch('pull_number')
-            ).perform
+            repo_id = args.fetch('repo_id')
+            repository = ::Github::Repository.find_by!(external_id: repo_id)
+
+            repository.ai_code_review_prompts.each do |prompt|
+              ::Github::Repos::Pulls::Reviewers::OllamaAI.new(
+                repo_full_name: args.fetch('repo_full_name'),
+                pull_number: args.fetch('pull_number'),
+                octokit: octokit_for(token),
+                prompt:
+              ).perform
+              prompt.increment!(:reviews_count)
+            end
           end
 
           private

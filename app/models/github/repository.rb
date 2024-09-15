@@ -9,7 +9,8 @@ module Github
   	         source: :installation
 
     has_many :repository_ai_code_review_prompts,
-             class_name: 'Github::RepositoryAICodeReivewPrompt',
+             -> { order(:position) },
+             class_name: 'Github::RepositoryAICodeReviewPrompt',
              dependent: :destroy
 
     has_many :ai_code_review_prompts,

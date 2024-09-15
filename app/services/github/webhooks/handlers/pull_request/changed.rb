@@ -7,7 +7,8 @@ module Github
       	class Changed < Base
 
       		def perform
-            opts = { installation_id:, repo_full_name:, pull_number: }.stringify_keys
+            opts = { installation_id:, repo_full_name:, pull_number:, repo_id: }.stringify_keys
+
             ::Github::Repos::Pulls::Reviewers::OllamaAIJob.perform_later(**opts)
       		end
 
@@ -19,6 +20,10 @@ module Github
 
           def repo_full_name
             @params.dig(:pull_request, :base, :repo, :full_name)
+          end
+
+          def repo_id
+            @params.dig(:pull_request, :base, :repo, :id)
           end
 
           def pull_number
