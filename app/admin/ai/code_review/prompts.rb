@@ -43,6 +43,7 @@ ActiveAdmin.register AI::CodeReview::Prompt do
   form do |f|
     f.inputs 'Prompt' do
       f.input :title, required: true
+      f.input :key, required: true
 
       f.input :category,
               required: true,

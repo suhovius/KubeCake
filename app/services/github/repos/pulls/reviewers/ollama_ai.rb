@@ -4,10 +4,10 @@ module Github
       module Reviewers
         class OllamaAI < Base
           VARIABLE_NAMES = {
-            '<pull_request_title>'       => pull_request_title,
-            '<pull_request_description>' => pull_request_description,
-            '<commit_messages>'          => commit_messages,
-            '<diff_text>'                => diff_text
+            '<pull_request_title>'       => :pull_request_title,
+            '<pull_request_description>' => :pull_request_description,
+            '<commit_messages>'          => :commit_messages,
+            '<diff_text>'                => :diff_text
           }.freeze
 
           def initialize(octokit:, repo_full_name:, pull_number:, prompt:)
@@ -41,6 +41,17 @@ module Github
             )
           end
 
+          def prepare_prompt
+            @prompt.template.tap do |template|
+              VARIABLE_NAMES.each do |variable_name, value_method_name|
+                value = send(value_method_name)
+                template.gsub!(variable_name, value)
+              end
+            end
+          end
+
+          # ========== Variable Values Methods ======================================
+
           def pull_request_title
             @pull_request_data[:title]
           end
@@ -51,12 +62,17 @@ module Github
 
           def commit_messages
             commits = @octokit.pull_request_commits(@repo_full_name, @pull_number)
+            texts = []
 
-            text = ""
-            commits.each do |item|
-              text += "#{item.commit.message}\n"
+            header = ['Commit SHA', 'Auhtor Login', 'Message'].join(' | ')
+            texts << header
+
+            commits.each do |data|
+              row = [data.sha, "@#{data.author.login}", data.commit.message].join(' | ')
+              texts << row
             end
-            text
+
+            texts.join("\n")
           end
 
           def diff_text
@@ -68,13 +84,6 @@ module Github
             end
 
             text
-          end
-
-          def prepare_prompt
-            @prompt.template.tap do |template|
-              VARIABLE_NAMES.each do |variable_name, value_method_name|
-              template.gsub!(variable_name, value_method_name)
-            end
           end
         end
       end

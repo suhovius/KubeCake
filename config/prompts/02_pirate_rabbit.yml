@@ -2,7 +2,7 @@
 # https://github.com/coderabbitai/ai-pr-reviewer/blob/main/src/prompts.ts
 # So, thus it's name is Pirate + Code Rabbit = Pirate Rabbit
 #
-title: Pirate Rabbit
+title: "Pirate Rabbit :pirate_flag: :rabbit2: :crossed_swords:"
 key: pirate_rabbit
 category: practical
 template: |
