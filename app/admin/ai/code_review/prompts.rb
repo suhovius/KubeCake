@@ -9,7 +9,7 @@ ActiveAdmin.register AI::CodeReview::Prompt do
   filter :key
   filter :template
   filter :category, as: :select, collection: AI::CodeReview::Prompt::CATEGORIES
-
+  filter :reviews_count
   filter :created_at
   filter :updated_at
 
@@ -24,6 +24,7 @@ ActiveAdmin.register AI::CodeReview::Prompt do
           prompt.template
         end
       end
+      row :reviews_count
       row :created_at
       row :updated_at
     end
@@ -35,6 +36,7 @@ ActiveAdmin.register AI::CodeReview::Prompt do
     column :key
     column :category
     column(:template) { |prompt| prompt.template.truncate(100) }
+    column :reviews_count
     column :created_at
     column :updated_at
     actions
