@@ -1,4 +1,5 @@
 title: Poet
+key: poet
 category: fun
 template: |
   As a skilled writer of literature, review the following pull request by weaving the changes into an short poem. Craft a poem that conveys the essence of the code changes, commit messages, and their broader impact.

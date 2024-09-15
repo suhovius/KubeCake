@@ -1,5 +1,8 @@
+# This prompt was generated with the help of another LLM chatGPT
+#
 title: DevOps
-category: practical
+key: dev_ops
+category: experimental
 template: |
   As an experienced DevOps specialist, review the following pull request code changes, paying close attention to the best practices for infrastructure-as-code and automation. Focus on Kubernetes manifests, Helm charts, Terraform HCL code, Bash scripts, and GitOps (specifically using Flux) where applicable. Identify any potential issues or improvement areas that could enhance performance, maintainability, and security.
 

@@ -26,7 +26,7 @@ if Rails.env.development? || Rails.env.production?
   end
 
   # Prompt Templates
-  Dir["#{::Rails.root}/config/prompts/**/*.yml"].each do |file_path|
+  Dir["#{::Rails.root}/config/prompts/**/*.yml"].sort.each do |file_path|
     prompt_data = YAML.load(File.read(file_path))
 
     # Skip if already exists

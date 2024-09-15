@@ -1,4 +1,7 @@
+# This prompt was generated with the help of another LLM chatGPT
+#
 title: Literature Writer
+key: literature_writer
 category: fun
 template: |
   As a skilled writer of literature, review the following pull request by weaving the changes into an short narrative. Craft a story that conveys the essence of the code changes, commit messages, and their broader impact. Your narrative should reveal the underlying struggles, triumphs, and challenges within the code, using metaphors, analogies, and descriptive prose to bring the review to life.

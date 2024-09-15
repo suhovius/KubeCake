@@ -1,5 +1,8 @@
+# This prompt was generated with the help of another LLM chatGPT
+#
 title: SecOps
-category: practical
+key: sec_ops
+category: experimental
 template: |
   As a highly skilled SecOps specialist, review the following pull request code changes with a focus on identifying potential security vulnerabilities, threats, and adherence to best practices for secure coding and infrastructure. Analyze the changes from a security perspective, ensuring the application and infrastructure are protected from common security risks.
 

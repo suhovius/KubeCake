@@ -3,9 +3,10 @@ ActiveAdmin.register AI::CodeReview::Prompt do
        parent: 'AI Code Review',
        priority: 1
 
-  permit_params :title, :category, :template
+  permit_params :title, :key, :category, :template
 
   filter :title
+  filter :key
   filter :template
   filter :category, as: :select, collection: AI::CodeReview::Prompt::CATEGORIES
 
@@ -16,6 +17,7 @@ ActiveAdmin.register AI::CodeReview::Prompt do
     attributes_table do
       row :id
       row :title
+      row :key
       row :category
       row(:template) do
         content_tag(:pre, class: 'prompt_template') do
@@ -30,6 +32,7 @@ ActiveAdmin.register AI::CodeReview::Prompt do
   index do
     column :id
     column :title
+    column :key
     column :category
     column(:template) { |prompt| prompt.template.truncate(100) }
     column :created_at

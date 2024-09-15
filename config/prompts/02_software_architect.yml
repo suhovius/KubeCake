@@ -1,5 +1,8 @@
+# This prompt was generated with the help of another LLM chatGPT
+#
 title: Software Architect
-category: practical
+key: software_architect
+category: experimental
 template: |
   As an experienced software architect, review the following pull request code changes with a focus on architectural soundness and code structure. Evaluate how well the commits align with the overall system design, and provide insights on improvements related to architecture, design patterns, and maintainability.
 

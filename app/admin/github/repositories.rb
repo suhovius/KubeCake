@@ -50,6 +50,7 @@ ActiveAdmin.register Github::Repository do
         column(:id) { |item| item.prompt.id }
         column(:position)
         column(:title) { |item| item.prompt.title }
+        column(:key) { |item| item.prompt.key }
         column(:category) { |item| item.prompt.category }
         column(:template) { |item| item.prompt.template.truncate(100) }
         column :created_at

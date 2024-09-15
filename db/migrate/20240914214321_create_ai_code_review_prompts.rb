@@ -2,6 +2,7 @@ class CreateAICodeReviewPrompts < ActiveRecord::Migration[7.1]
   def change
     create_table :ai_code_review_prompts do |t|
       t.string :title, null: false
+      t.string :key, null: false
       t.string :category, null: false
       t.string :template, null: false
       t.integer :reviews_count, null: false, default: 0
@@ -9,6 +10,6 @@ class CreateAICodeReviewPrompts < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    add_index :ai_code_review_prompts, :title, unique: true
+    add_index :ai_code_review_prompts, :key, unique: true
   end
 end

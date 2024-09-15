@@ -1,4 +1,10 @@
-title: Summarizer
+# CREDIT: This prompt idea was taken from here
+# So, thus it's name is pirate battle cry Arrr + llama that somewhat resembles name
+# of it's original library, - 'pullama'
+# https://github.com/getmoss/pullama/blob/master/pullama/diffchain/prompts.py
+#
+title: Arrrllama
+key: pullama
 category: practical
 template: |
   ====
