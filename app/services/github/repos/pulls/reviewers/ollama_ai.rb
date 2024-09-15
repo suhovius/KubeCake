@@ -3,8 +3,12 @@ module Github
     module Pulls
       module Reviewers
         class OllamaAI < Base
-          DIFF_VARIABLE_NAME = '<diff_text>'.freeze
-          COMMIT_MESSAGES_VARIABLE_NAME = '<commit_messages>'.freeze
+          VARIABLE_NAMES = {
+            '<pull_request_title>'       => :pull_request_title,
+            '<pull_request_description>' => :pull_request_description,
+            '<commit_messages>'          => :commit_messages,
+            '<diff_text>'                => :diff_text
+          }.freeze
 
           def initialize(octokit:, repo_full_name:, pull_number:, prompt:)
             super(octokit:, repo_full_name:, pull_number:)
@@ -15,7 +19,7 @@ module Github
 
           def prepare_comment_text
             [
-              ['Reviewer:', @prompt.title].join(' '),
+              ['**Reviewer:**', @prompt.title].join(' '),
               "\n",
               generated_data.first.dig('response')
             ].join("\n")
@@ -37,6 +41,41 @@ module Github
             )
           end
 
+          def prepare_prompt
+            @prompt.template.tap do |template|
+              VARIABLE_NAMES.each do |variable_name, value_method_name|
+                value = send(value_method_name)
+                template.gsub!(variable_name, value)
+              end
+            end
+          end
+
+          # ========== Variable Values Methods ======================================
+
+          def pull_request_title
+            @pull_request_data[:title]
+          end
+
+          def pull_request_description
+            @pull_request_data[:body]
+          end
+
+          def commit_messages
+            commits = @octokit.pull_request_commits(@repo_full_name, @pull_number)
+            texts = []
+
+            commits.each do |data|
+              row = [
+                "Commit SHA: #{data.sha}",
+                "Author login: @#{data.author.login}",
+                "Commit message text: #{data.commit.message}"
+              ].join("\n")
+              texts << row
+            end
+
+            texts.join("\n")
+          end
+
           def diff_text
             diff_files = @octokit.pull_request_files(@repo_full_name, @pull_number)
 
@@ -46,23 +85,6 @@ module Github
             end
 
             text
-          end
-
-          def commit_messages
-            commits = @octokit.pull_request_commits(@repo_full_name, @pull_number)
-
-            text = ""
-            commits.each do |item|
-              text += "#{item.commit.message}\n"
-            end
-            text
-          end
-
-          def prepare_prompt
-            @prompt.template.tap do |template|
-              template.gsub!(DIFF_VARIABLE_NAME, diff_text)
-              template.gsub!(COMMIT_MESSAGES_VARIABLE_NAME, commit_messages)
-            end
           end
         end
       end

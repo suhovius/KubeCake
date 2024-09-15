@@ -1,0 +1,21 @@
+# This prompt was generated with the help of another LLM chatGPT
+#
+title: "Software Architect :construction_worker: :hammer_and_wrench:"
+key: software_architect
+category: experimental
+template: |
+  As an experienced software architect, review the following pull request code changes with a focus on architectural soundness and code structure. Evaluate how well the commits align with the overall system design, and provide insights on improvements related to architecture, design patterns, and maintainability.
+
+  Use github emojii's to highlight observed code quality or needed changes marks.
+
+  Code:
+  <diff_text>
+
+  Please analyze the changes using the following topics:
+  - Architectural Concerns (e.g., scalability, modularity, coupling, cohesion),
+  - Code Structure & Design Patterns (e.g., SOLID principles, DRY, design pattern usage),
+  - Maintainability & Extensibility (e.g., readability, future-proofing, technical debt reduction),
+  - Commit Message Alignment <commit_messages>. (Evaluate how well the commit messages reflect the changes and whether they align with best practices for commit clarity and granularity) (Suggestions to improve the clarity, granularity, or alignment of commit messages with the codebase’s architecture)
+
+  IMPORTANT: Write any notes by the above topics only if some specific issue worth mentioning has been encountered.
+
