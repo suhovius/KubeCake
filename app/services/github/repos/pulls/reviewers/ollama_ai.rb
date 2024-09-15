@@ -19,7 +19,7 @@ module Github
 
           def prepare_comment_text
             [
-              ['Reviewer:', @prompt.title].join(' '),
+              ['**Reviewer:**', @prompt.title].join(' '),
               "\n",
               generated_data.first.dig('response')
             ].join("\n")
@@ -64,11 +64,12 @@ module Github
             commits = @octokit.pull_request_commits(@repo_full_name, @pull_number)
             texts = []
 
-            header = ['Commit SHA', 'Auhtor Login', 'Message'].join(' | ')
-            texts << header
-
             commits.each do |data|
-              row = [data.sha, "@#{data.author.login}", data.commit.message].join(' | ')
+              row = [
+                "Commit SHA: #{data.sha}",
+                "Author login: @#{data.author.login}",
+                "Commit message text: #{data.commit.message}"
+              ].join("\n")
               texts << row
             end
 
