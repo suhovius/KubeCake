@@ -50,7 +50,7 @@ gem 'bootsnap', require: false
 
 gem 'dotenv-rails', '~> 3.1'
 gem 'draper', '~> 4.0', '>= 4.0.2'
-gem 'activeadmin', '~> 3.2'
+gem 'activeadmin', '>= 3.2.2'
 gem 'activeadmin-searchable_select', '~> 1.8'
 gem 'activeadmin_reorderable', '~> 0.3.3'
 gem 'activeadmin_addons', '~> 1.10', '>= 1.10.1'
@@ -61,6 +61,7 @@ gem 'chartkick', '~> 5.0', '>= 5.0.6'
 gem 'csv', '~> 3.3'
 gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'dry-validation', '~> 1.10'
+gem 'gemoji', '~> 4.1'
 gem 'groupdate', '~> 6.4'
 gem 'pundit', '~> 2.3', '>= 2.3.1'
 gem 'rolify', '~> 6.0', '>= 6.0.1'
@@ -82,6 +83,11 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.1', '>= 6.1.2'
   # rSwag API Documentation
   gem 'rswag-specs', '~> 2.13'
+
+  # Needed for test data at development and test environments
+  gem 'factory_bot_rails', '~> 6.4', '>= 6.4.3'
+  gem 'faker', '~> 3.3', '>= 3.3.1'
+  gem 'ffaker', '~> 2.23'
 end
 
 group :development do
@@ -97,9 +103,6 @@ end
 
 group :test do
   gem 'database_cleaner', '~> 2.0', '>= 2.0.2'
-  gem 'factory_bot_rails', '~> 6.4', '>= 6.4.3'
-  gem 'faker', '~> 3.3', '>= 3.3.1'
-  gem 'ffaker', '~> 2.23'
 
   gem 'rubocop-rails', '~> 2.24', '>= 2.24.1'
 

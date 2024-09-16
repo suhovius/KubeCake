@@ -18,10 +18,11 @@ ActiveAdmin.register Github::Repository do
   form do |f|
     f.inputs 'Github Repository' do
       f.input :ai_code_review_prompt_ids,
+              label: 'AI Code Review Prompts',
               required: true,
               as: :select,
               multiple: true,
-              collection: AI::CodeReview::Prompt.all,
+              collection: AI::CodeReview::Prompt.all.map { |prompt| [emojify_unicode(prompt.title), prompt.id] },
               include_blank: false
     end
     f.actions
@@ -48,8 +49,7 @@ ActiveAdmin.register Github::Repository do
     panel 'Prompts' do
       reorderable_table_for repository.repository_ai_code_review_prompts.preload(:prompt) do
         column(:id) { |item| item.prompt.id }
-        column(:position)
-        column(:title) { |item| item.prompt.title }
+        column(:title) { |item| emojify_unicode(item.prompt.title) }
         column(:key) { |item| item.prompt.key }
         column(:category) { |item| item.prompt.category }
         column(:template) { |item| item.prompt.template.truncate(100) }

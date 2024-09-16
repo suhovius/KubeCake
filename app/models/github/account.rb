@@ -6,5 +6,9 @@ module Github
   					 class_name: 'Github::Installation',
   					 foreign_key: :account_id,
   					 dependent: :destroy
+
+    has_many :repositories,
+             through: :installations,
+             source: :repositories
   end
 end

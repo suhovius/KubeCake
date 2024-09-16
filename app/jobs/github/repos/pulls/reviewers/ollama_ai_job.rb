@@ -8,6 +8,10 @@ module Github
         class OllamaAIJob < ApplicationJob
           queue_as :code_reviews
 
+          # Skip retry as do not want to flood
+          # comments section with many previous comments
+          sidekiq_options retry: false
+
           def perform(**args)
             installation_id = args.fetch('installation_id')
 
