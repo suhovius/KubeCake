@@ -43,7 +43,7 @@ ActiveAdmin.register_page 'Dashboard' do
         panel "Installations dynamics in #{days_offset} days" do
           installations = ::Github::Installation.where("created_at >= ?", Time.zone.now - days_offset.days)
 
-          line_chart(
+          area_chart(
             ::Github::Installation.group_by_day(:created_at).count
           )
         end
