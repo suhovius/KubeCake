@@ -29,10 +29,13 @@ ActiveAdmin.register_page 'Dashboard' do
       column do
         top_count = 10
         panel "Top #{top_count} Accounts by Repositories count" do
-          data = ::Github::Account.left_outer_joins(:repositories).group('github_accounts.login').count
-          bar_chart(
-            data.sort_by { |login, count| -1 * count }.first(top_count)
-          )
+          data = ::Github::Account.left_outer_joins(:repositories)
+                                  .group('github_accounts.login')
+                                  .order('count_all DESC')
+                                  .limit(top_count)
+                                  .count
+
+          bar_chart(data)
         end
       end
     end
@@ -40,7 +43,7 @@ ActiveAdmin.register_page 'Dashboard' do
     columns do
       column do
         days_offset = 30
-        panel "Installations dynamics in #{days_offset} days" do
+        panel "Apps Installations dynamics in #{days_offset} days" do
           installations = ::Github::Installation.where("created_at >= ?", Time.zone.now - days_offset.days)
 
           area_chart(
