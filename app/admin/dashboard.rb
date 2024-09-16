@@ -16,7 +16,7 @@ ActiveAdmin.register_page 'Dashboard' do
 
       column do
         panel 'Prompts by Repositories count' do
-          data = ::AI::CodeReview::Prompt.joins(:repositories).group('ai_code_review_prompts.title').count
+          data = ::AI::CodeReview::Prompt.left_outer_joins(:repositories).group('ai_code_review_prompts.title').count
           data.transform_keys! { |title| emojify_unicode(title) }
           bar_chart(
             data.sort_by { |title, count| -1 * count }
@@ -28,8 +28,9 @@ ActiveAdmin.register_page 'Dashboard' do
     columns do
       column do
         panel 'Accounts by Repositories count' do
-          column_chart(
-            ::Github::Account.joins(:repositories).group('github_accounts.login').count
+          data = ::Github::Account.left_outer_joins(:repositories).group('github_accounts.login').count
+          bar_chart(
+            data.sort_by { |login, count| -1 * count }
           )
         end
       end
@@ -39,18 +40,10 @@ ActiveAdmin.register_page 'Dashboard' do
       column do
         days_offset = 30
         panel "Installations dynamics in #{days_offset} days" do
-          # In future versions it might support multiple apps
-          # so app_slug is being extracted here
-          app_slugs = ::Github::Installation.distinct(:app_slug).pluck(:app_slug)
           installations = ::Github::Installation.where("created_at >= ?", Time.zone.now - days_offset.days)
 
           line_chart(
-            app_slugs.map do |app_slug|
-              {
-                name: app_slug,
-                data: installations.where(app_slug:).group_by_day(:created_at).count
-              }
-            end
+            ::Github::Installation.group_by_day(:created_at).count
           )
         end
       end

@@ -26,12 +26,25 @@ if Rails.env.development? || Rails.env.production?
   end
 
   # Prompt Templates
-  Dir["#{::Rails.root}/config/prompts/**/*.yml"].sort.each do |file_path|
-    prompt_data = YAML.load(File.read(file_path))
+  Rake::Task['ai:code_review:prompts:create'].invoke
+end
 
-    # Skip if already exists
-    next if AI::CodeReview::Prompt.find_by(title: prompt_data['title'])
+if Rails.env.development?
+  prompts = ::AI::CodeReview::Prompt.all
 
-    AI::CodeReview::Prompt.create!(prompt_data)
+  if ENV.fetch('GENERATE_DUMMY_GITHUB_DATA') == 'yes'
+    FactoryBot.create_list(:github_account, 50).each do |account|
+      time = ::FFaker::Time.between(Time.zone.now - 30.days, Time.zone.now)
+      installation = FactoryBot.create(:github_installation, account:, created_at: time, updated_at: time)
+
+      FactoryBot.create_list(:github_repository, 10 + rand(50)).each do |repository|
+        installation.repositories << repository
+        selected_prompts = []
+        selected_prompts += prompts.practical.sample(prompts.practical.count)
+        selected_prompts += prompts.experimental.sample(3)
+        selected_prompts += prompts.fun.sample(2)
+        repository.ai_code_review_prompts = selected_prompts
+      end
+    end
   end
 end

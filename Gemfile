@@ -83,6 +83,11 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.1', '>= 6.1.2'
   # rSwag API Documentation
   gem 'rswag-specs', '~> 2.13'
+
+  # Needed for test data at development and test environments
+  gem 'factory_bot_rails', '~> 6.4', '>= 6.4.3'
+  gem 'faker', '~> 3.3', '>= 3.3.1'
+  gem 'ffaker', '~> 2.23'
 end
 
 group :development do
@@ -98,9 +103,6 @@ end
 
 group :test do
   gem 'database_cleaner', '~> 2.0', '>= 2.0.2'
-  gem 'factory_bot_rails', '~> 6.4', '>= 6.4.3'
-  gem 'faker', '~> 3.3', '>= 3.3.1'
-  gem 'ffaker', '~> 2.23'
 
   gem 'rubocop-rails', '~> 2.24', '>= 2.24.1'
 
