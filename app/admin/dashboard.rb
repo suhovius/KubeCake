@@ -27,10 +27,11 @@ ActiveAdmin.register_page 'Dashboard' do
 
     columns do
       column do
-        panel 'Accounts by Repositories count' do
+        top_count = 10
+        panel "Top #{top_count} Accounts by Repositories count" do
           data = ::Github::Account.left_outer_joins(:repositories).group('github_accounts.login').count
           bar_chart(
-            data.sort_by { |login, count| -1 * count }
+            data.sort_by { |login, count| -1 * count }.first(top_count)
           )
         end
       end
