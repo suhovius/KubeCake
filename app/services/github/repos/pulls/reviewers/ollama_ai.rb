@@ -45,7 +45,7 @@ module Github
             @prompt.template.tap do |template|
               VARIABLE_NAMES.each do |variable_name, value_method_name|
                 value = send(value_method_name)
-                template.gsub!(variable_name, value)
+                template.gsub!(variable_name, value.to_s)
               end
             end
           end
