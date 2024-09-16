@@ -50,7 +50,7 @@ gem 'bootsnap', require: false
 
 gem 'dotenv-rails', '~> 3.1'
 gem 'draper', '~> 4.0', '>= 4.0.2'
-gem 'activeadmin', '~> 3.2'
+gem 'activeadmin', '>= 3.2.2'
 gem 'activeadmin-searchable_select', '~> 1.8'
 gem 'activeadmin_reorderable', '~> 0.3.3'
 gem 'activeadmin_addons', '~> 1.10', '>= 1.10.1'
