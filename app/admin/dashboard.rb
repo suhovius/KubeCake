@@ -38,6 +38,15 @@ ActiveAdmin.register_page 'Dashboard' do
           bar_chart(data)
         end
       end
+
+      column do
+        panel 'Categories by Prompts count' do
+          data = ::AI::CodeReview::Prompt.group(:category).order('count_all DESC').count
+          column_chart(
+            data.transform_keys! { |title| emojify_unicode(title) }
+          )
+        end
+      end
     end
 
     columns do

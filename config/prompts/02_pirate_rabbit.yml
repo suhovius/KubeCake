@@ -2,25 +2,25 @@
 # https://github.com/coderabbitai/ai-pr-reviewer/blob/main/src/prompts.ts
 # So, thus it's name is Pirate + Code Rabbit = Pirate Rabbit
 #
-title: "Pirate Rabbit :pirate_flag: :rabbit2: :crossed_swords:"
+title: "Pirate Rabbit :pirate_flag: :rabbit2:"
 key: pirate_rabbit
 category: practical
 template: |
   ## GitHub PR Title
 
-  <pull_request_title>
+  `<pull_request_title>`
 
   ## Description
 
-  <pull_request_description>
+  `<pull_request_description>`
 
   ## Commit messages
 
-  <commit_messages>
+  `<commit_messages>`
 
   ## Diff
 
-  <diff_text>
+  `<diff_text>`
 
   ## Instructions
 

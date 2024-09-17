@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Github::CodeReview, type: :model do
+RSpec.describe Github::RepositoryAICodeReviewPrompt, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end
