@@ -3,13 +3,13 @@
 # So, thus it's name is pirate battle cry Arrr + llama that somewhat resembles name
 # of it's original library, - 'pullama'
 #
-title: "Arrrllama :pirate_flag: :llama: :crossed_swords:"
+title: "Arrrllama :pirate_flag: :llama:"
 key: arrrllama
 category: practical
 template: |
   ====
-  The changed files in this diff: <diff_text>. Concentrate your analysis on these files only.
-  To help you understand the changes, here are the commit messages: <commit_messages> (do not use them as the sole criteria)
+  The changed files in this diff: `<diff_text>`. Concentrate your analysis on these files only.
+  To help you understand the changes, here are the commit messages: `<commit_messages>` (do not use them as the sole criteria)
   ====
   Given you are preparing a pull request for your colleagues, summarize the git diff and out in markdown format:
 

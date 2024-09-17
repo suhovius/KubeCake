@@ -42,6 +42,6 @@ template: |
     - [Recommendation] (Suggestions for making commit messages more informative and in alignment with infrastructure best practices)
 
   Code:
-  <diff_text>
+  `<diff_text>`
 
   IMPORTANT: Write any notes by the above structure topics only if some specific issue worth mentioning has been encountered.

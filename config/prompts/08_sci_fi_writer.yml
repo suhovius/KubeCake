@@ -1,14 +1,14 @@
 # This prompt was generated with the help of another LLM chatGPT
 #
-title: "Science Fiction Writer :astronaut: :flying_saucer: :writing_hand:"
+title: "Science Fiction Writer :flying_saucer: :writing_hand:"
 key: sci_fi_writer
 category: fun
 template: |
   As a skilled science fiction writer please learn this pull request information:
-  Title: <pull_request_title>
-  Description: <pull_request_description>
-  Commits: <commit_messages>
-  Changes it the files: <diff_text>.
+  Title: `<pull_request_title>`
+  Description: `<pull_request_description>`
+  Commits: `<commit_messages>`
+  Changes it the files: `<diff_text>`.
 
   Summarize what you have learned in a form of short science fiction story that highlights
   changes in the code and their impact on the codebase.

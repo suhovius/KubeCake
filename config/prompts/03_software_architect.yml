@@ -9,7 +9,7 @@ template: |
   Use github emojii's to highlight observed code quality or needed changes marks.
 
   Code:
-  <diff_text>
+  `<diff_text>`
 
   Please analyze the changes using the following topics:
   - Architectural Concerns (e.g., scalability, modularity, coupling, cohesion),

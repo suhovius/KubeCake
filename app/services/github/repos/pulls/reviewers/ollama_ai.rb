@@ -66,7 +66,6 @@ module Github
 
             commits.each do |data|
               row = [
-                "Commit SHA: #{data.sha}",
                 "Author login: @#{data.author.login}",
                 "Commit message text: #{data.commit.message}"
               ].join("\n")
