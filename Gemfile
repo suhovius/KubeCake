@@ -70,6 +70,10 @@ gem 'rswag-ui', '~> 2.13'
 gem 'sidekiq', '~> 7.2', '>= 7.2.4'
 gem 'sidekiq-scheduler', '~> 5.0', '>= 5.0.3'
 
+gem 'nokogiri', '>= 1.16.5'
+gem 'actiontext', '>= 7.1.3.4'
+gem 'actionpack', '>= 7.1.3.4'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[ mri windows ]
