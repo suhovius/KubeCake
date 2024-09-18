@@ -42,6 +42,7 @@ en:
               Also remember that diff files use a plus sign to indicate additions and negative
               sign to indicate removals. It is not useful to know a new line was added, changed or removed.
               We are here for the meaning of things. Also do show not sensitive data if you see them.
+              Please do not show the files diff but rather summarize in simple words only important changes.
 
   activerecord:
     errors:

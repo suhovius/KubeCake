@@ -13,9 +13,15 @@ Link to Github App Installation [KubeCake Glaze](https://github.com/apps/kubecak
 #### NOTE:
 *If you want to try it then do it in yours own Github App (See instructions below) or infrastructure. As this demo Github App's Backend might not be running at the moment.*
 
-## Video demonstration
+## Demonstration
 
-[![IMAGE ALT TEXT](.data/video-demo-preview.jpg)](http://www.youtube.com/watch?v=vk1Nq5niAsM "Click to watch")
+### App Installation and Usage Video Demo
+
+[![App Install and Usage Demo](.data/video-demo-preview.jpg)](http://www.youtube.com/watch?v=vk1Nq5niAsM "Click to watch")
+
+### Admin Panel AI Code Prompts Video Demo
+
+[![Admin Panel AI Code Prompts Demo](.data/video-demo-admin-preview.jpg)](https://www.youtube.com/watch?v=5zZ-ImLJkfk "Click to watch")
 
 ## Architectural Decision Records (ADR)
 
@@ -41,16 +47,24 @@ While organization admins can only manage organsations data to which they are gr
 
 Also admin panel allows `super_admin` users to see the rSwag API documentation (INFO: currenlty empty) and to monitor the state of the sidekiq bacground jobs and scheduled jobs at the 'Settings' menu section. Super admin users also can be managed there.
 
-Observed github repository pull requests must trigger the webhooks, which schedule background job that performs pull request code review with Ollama prompts and adds comments to the pull request.
+Observed github repository pull requests must trigger the webhooks, which schedule background job that performs pull request code reivew with Ollama prompts and adds comments to the pull request.
 
-Prompt templates should be able to be configured/assigned per each prevously synched repo by Super Admin. Also multipe prompts and their execution order should be able to managed. So there must be manageable collection of diffrent prompts and ability to assign and arrange their order per each project.
+Prompt templates can be configured/assigned per each previously synched repo by Super Admin. Also multiple prompts and their execution order can be managed too. Admin Panel contains manageable collection of diffrent prompts and allows to assign and arrange their order per each project.
 
-Also Admin Panel should show all the synched Github Repositories and Accounts data.
+Also Admin Panel displays all the synched Github Repositories, Accounts and App Installations data.
 
-#### *NOTE: Currently Admin Panel is just a template. View synched Accounts, Repositories and Prompts per Repo editing feature will be available before Hackathon project demonstration. Currently it uses hardcoded prompt template.*
+#### Admin Panel Features
+- Dashboard with stats
+- AI Code Review Prompts Editing Demo and Reviewing Demo
+- Sidekiq Background Jobs Admin Panel
+- Github Repositories, App Installations and Accounts Management
+- Super Admins Management
+- Incomplete functionality of Organisations and Organisation Admins.
 
 `Organization` (*INFO: Organizations and organization admins are currently out of scope*) presents business concept of some kind of corporate client of this admin panel.
-Organization has such related entites like: Github App configs, and authorized attached github repositories.
+Organization will have such related entites like: Github App configs, and authorized attached github repositories. So, it shoudld allow Organizations to have multiple Github App credentials and also to create sync App configs from admin UI via API automatically.
+
+#### Organizations features are for the future releases.
 
 ## Purpose
 
@@ -59,13 +73,16 @@ Main purpose for MVP is to test the general implementation and basic functionali
 
 ## Deployment Settings (TODO: TBD Add description with DevOps!)
 
+Must have helm charts for local development in kind cluster. And helm chart for AWS deployment with appropriate terraform code to manage EKS, RDS, Elasticache and other services.
+
+Also it needs to have work flow that might bild a release after each merge to produciton branch when all the tests succeed.
+
 *Repo has such DevOps area features as:*
 
 | Directory         | Description                                  |
 | ----------------- | -------------------------------------------- |
 | .github/workflows | Github Actions Workflows                     |
 | helm              | Helm Charts                                  |
-| k8s               | Kubernetes Deployment manifests              |
 | terraform         | Terraform infrastructure configuration files |
 
 ## Dependencies
