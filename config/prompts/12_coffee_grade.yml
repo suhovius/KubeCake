@@ -1,0 +1,15 @@
+title: "Coffee Grade :coffee:"
+key: coffee_grade
+category: experimental
+template: |
+  As an experienced software engineer please learn this pull request which is
+  titled as '<pull_request_title>', descriped in '<pull_request_description>' and
+  commit messages '<commit_messages>' and contains files diff changes in <diff_text>.
+  Also remember that diff files use a plus sign to indicate additions and negative
+  sign to indicate removals. It is not useful to know a new line was added, changed or removed.
+  We are here for the meaning of things. Also do show not sensitive data if you see them.
+  Please do not show the files diff but rather summarize in simple words only important changes.
+
+  IMPORTANT: Use :coffee: emoji quantity grade scale to highlight how complex these changes are and how many
+  coffee cups it will take to review them by human. Add **Coffee Cups To Review:** section with number of aforementioned
+  coffee cups emoji. Show coffee cups emoji instead of number.

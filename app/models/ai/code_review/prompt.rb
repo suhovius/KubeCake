@@ -4,6 +4,8 @@ module AI
 		  validates :title, :key, :template, presence: true
 		  validates :title, :key, uniqueness: true
 
+		  validates :template, format: { with: /<diff_text>/ }
+
 		  CATEGORIES = %w[practical experimental fun].freeze
 		  validates :category, presence: true, inclusion: { in: CATEGORIES }
 

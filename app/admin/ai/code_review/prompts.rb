@@ -57,7 +57,11 @@ ActiveAdmin.register AI::CodeReview::Prompt do
         :template,
         as: :text,
         required: true,
-        input_html: { rows: 35 }
+        input_html: {
+          rows: 35,
+          placeholder: I18n.t('active_admin.ai.code_review.prompt.template.placeholder')
+        },
+        hint: "Can contain such variables: #{::Github::Repos::Pulls::Reviewers::OllamaAI::VARIABLE_NAMES.keys.join(', ')}",
       )
     end
     f.actions
